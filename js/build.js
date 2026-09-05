@@ -845,8 +845,8 @@ const renderer = new THREE.WebGLRenderer({
 	powerPreference: 'high-performance',
 	depth: true});
 
-scene.background = new THREE.Color( 0xE7B251 );
-
+scene.background = new THREE.Color( 0x87CEEB );
+//shouldnt the sky be sky blue? i think so
 renderer.setSize(config.renderer.width * config.renderer.render_at, config.renderer.height * config.renderer.render_at);
 renderer.setPixelRatio( window.devicePixelRatio );
 
