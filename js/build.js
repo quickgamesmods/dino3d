@@ -1594,12 +1594,25 @@ class NatureManager {
       "geometry": vox.geometry,
       "material": (function() {
             let texture = new THREE.TextureLoader().load(config.base_path + 'textures/ground_face.jpg');
+            
+            // Fix color profile encoding for modern Three.js
+            texture.colorSpace = THREE.SRGBColorSpace; 
+            
+            // Wrap and repeat properly over the voxel dimensions
+            texture.wrapS = THREE.RepeatWrapping;
+            texture.wrapT = THREE.RepeatWrapping;
+            texture.repeat.set(1.0, 1.0); // Start at 1.0, scale up if texture looks too big
+            
             texture.magFilter = THREE.NearestFilter;
             texture.minFilter = THREE.NearestFilter;
-            return new THREE.MeshLambertMaterial({ map: texture });
+            
+            return new THREE.MeshLambertMaterial({ 
+                map: texture,
+                transparent: false
+            });
      })()
-
     };
+
 
     // spawn runner ground chunks
     for(let i = 0; i < chunks; i++) {
