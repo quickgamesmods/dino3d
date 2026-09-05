@@ -1592,7 +1592,13 @@ class NatureManager {
     // set cache
     this.cache.ground = {
       "geometry": vox.geometry,
-      "material": vox.material
+      "material": (function() {
+            let texture = new THREE.TextureLoader().load(config.base_path + 'textures/ground_face.jpg');
+            texture.magFilter = THREE.NearestFilter;
+            texture.minFilter = THREE.NearestFilter;
+            return new THREE.MeshLambertMaterial({ map: texture });
+     })()
+
     };
 
     // spawn runner ground chunks
